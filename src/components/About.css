@@ -1,0 +1,37 @@
+.pleasant {
+    background-color: #99e71c5a;
+    padding: 2% 2% 2% 2%;
+}
+
+.subjects {
+    margin-bottom: 2%;
+}
+
+.subjects span {
+    padding-left: 6px;
+}
+
+.btn {
+    border-radius: 10em;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.input-field {
+    width: 12%;
+}
+
+@media only screen and (max-width: 600px) {
+    .subjects span {
+        display: block;
+    }
+
+    .subjects {
+        margin-bottom: 10%;
+    }
+
+    .input-field {
+        width: 40%;
+    }
+
+}
