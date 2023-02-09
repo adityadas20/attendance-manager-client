@@ -18,20 +18,17 @@ function Navbar() {
                     withCredentials: true
                 });
 
-            if (res.data) {
+            if (res.data)
                 dispatch({ type: 'USER', payload: true })
-            }
-            else {
+            else
                 dispatch({ type: 'USER', payload: false })
-            }
-
         }
         catch (err) {
             console.log(err);
         }
     }
     useEffect(() => {
-        callNavbar();
+        // callNavbar(); // called when component mounts
     });
     return (
         <>

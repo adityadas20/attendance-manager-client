@@ -10,7 +10,7 @@ function Logout() {
 
     let logoutUser = async () => {
         try {
-            dispatchToken({ type: 'CHANGE', payload: '' })
+            dispatchToken({ type: 'CHANGE', payload: '' }) // set token from context to empty string
             // await axios.get('http://localhost:3000/logout',
             //     {
             //         headers: {
@@ -19,14 +19,14 @@ function Logout() {
             //         },
             //         withCredentials: true
             //     });
-            dispatch({ type: 'USER', payload: false })
+            dispatch({ type: 'USER', payload: false }) // denotes user has logged out
             navigate('/login');
         } catch (err) {
             console.log(err);
         }
     }
     useEffect(() => {
-        logoutUser();
+        logoutUser(); // called when component mounts
     });
     return (
         <div>

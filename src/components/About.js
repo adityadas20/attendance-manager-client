@@ -7,27 +7,28 @@ import './About.css';
 function About() {
     const { stateToken, dispatchToken } = useContext(UserContext);
 
-    const [subjArr, setSubjArr] = useState([]);
-    const [subName, setSubName] = useState('');
-    const [present, setPresent] = useState(0);
-    const [absent, setAbsent] = useState(0);
-    const [user, setUser] = useState('');
-    const [goal, setGoal] = useState(0);
+    const [subName, setSubName] = useState(''); // stores new subject name
+    const [present, setPresent] = useState(0); //  stores new subject number of present days
+    const [absent, setAbsent] = useState(0); //  stores new subject number of absent days
+    const [user, setUser] = useState(''); // stores currently logged in user
+    const [subjArr, setSubjArr] = useState([]); // stores currently logged in user's subjects
+    const [goal, setGoal] = useState(0); // stores currently logged in user's attendance goal
 
     const navigate = useNavigate();
 
 
-    const callAboutUsPage = async () => {
+    const callAboutUsPage = async () => { // called on component did mount
         try {
             const res = await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/about',
-                { token: stateToken },
+                { token: stateToken },// sends data to backend, accessed from req.body
                 {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"
                     },
                     withCredentials: true
-                });
+                }
+            );
 
             const data = res.data;
 
@@ -50,13 +51,13 @@ function About() {
             let subjAbsent = 0;
             let tempArr = [...subjArr];
             for (let i = 0; i < tempArr.length; i++) {
-                if (tempArr[i].name === subjName) {
+                if (tempArr[i].name === subjName) { // matches the subject from the array which actually needs to be changed
                     tempArr[i].present++;
                     subjPresent = tempArr[i].present;
                     subjAbsent = tempArr[i].absent;
                 }
             }
-            setSubjArr(tempArr);
+            setSubjArr(tempArr); // subject array state updated
             await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/updateSubject', {
                 name: user, subjectName: subjName, present: subjPresent, absent: subjAbsent
             })
@@ -71,9 +72,9 @@ function About() {
             let subjAbsent = 0;
             let tempArr = [...subjArr];
             for (let i = 0; i < tempArr.length; i++) {
-                if (tempArr[i].name === subjName) {
+                if (tempArr[i].name === subjName) { // matches the subject from the array which actually needs to be changed
                     tempArr[i].present--;
-                    tempArr[i].present = Math.max(tempArr[i].present, 0);
+                    tempArr[i].present = Math.max(tempArr[i].present, 0); // number of days present can never be less than 0
                     subjPresent = tempArr[i].present;
                     subjAbsent = tempArr[i].absent;
                 }
@@ -138,7 +139,7 @@ function About() {
             })
             let tempArr = [];
             for (let i = 0; i < subjArr.length; i++) {
-                if (subjArr[i].name !== subjectToBeDeleted) {
+                if (subjArr[i].name !== subjectToBeDeleted) { // subject that is to be deleted is filtered out from the subjects array
                     tempArr.push(subjArr[i]);
                 }
             }
@@ -148,7 +149,7 @@ function About() {
         }
 
     }
-    let handleGoalChange = async (e) => {
+    let handleGoalChange = async (e) => { // changes the current attendance goal of the user
         setGoal(e.target.value)
 
         try {
@@ -161,22 +162,24 @@ function About() {
     }
     let handleSubmit = async (e) => {
         e.preventDefault();
-        if (subName === '') {
+        if (subName === '')
             return;
-        }
+
         try {
-            let newSubj = { name: subName.toUpperCase(), present: present, absent: absent };
-            let subjs = [...subjArr, newSubj];
+            let newSubj = { name: subName.toUpperCase(), present: present, absent: absent }; // creates a new subject object
+            let subjs = [...subjArr, newSubj]; // inserts the new subject into the subject array 
 
             await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/createSubject', {
                 name: user, subjectName: subName.toUpperCase(), pre: present, abs: absent
             })
+
             setSubjArr([...subjs]);
             setSubName('');
             setAbsent(0);
             setPresent(0);
-            document.getElementById("input1clear").value = "";
-            document.getElementById("input2clear").value = "";
+
+            document.getElementById("input1clear").value = ""; // clear input fields after form submit
+            document.getElementById("input2clear").value = ""; // clear input fields after form submit
 
         }
         catch (err) {

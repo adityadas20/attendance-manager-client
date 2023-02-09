@@ -5,21 +5,25 @@ import './Signup.css'
 
 function Signup() {
     const navigate = useNavigate();
-    const [user, setUser] = useState({
+
+    const [user, setUser] = useState({  // user details provided in form input field
         name: "", password: "", cpassword: ""
     });
+
     const handleInputs = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-        setUser({ ...user, [name]: value });
+        let name = e.target.name; // gets the name of the input field the user is currently typing in
+        let value = e.target.value; // value of whatever the user is typing
+        setUser({ ...user, [name]: value }); // user details updated in state
     };
     const postData = async (e) => {
         e.preventDefault();
         try {
             const { name, password, cpassword } = user;
-            await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/register', {
-                name, password, cpassword
-            });
+            await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/register',
+                { name, password, cpassword } // sends data to backend, accessed from req.body
+            );
+
+            // no error from backend, navigate to login page
             navigate('/login')
         } catch (err) {
             window.alert(err.response.data.error);

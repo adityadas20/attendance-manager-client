@@ -4,25 +4,27 @@ import axios from 'axios';
 import { UserContext } from "../App";
 
 function Login() {
-    const { state, dispatch } = useContext(UserContext);
-    const { stateToken, dispatchToken } = useContext(UserContext);
+    const { state, dispatch } = useContext(UserContext); // to check if the user is logged in or not
+    const { stateToken, dispatchToken } = useContext(UserContext); // to fetch the token generated from backend for unique identification of every user
 
-    const navigation = useNavigate();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const navigation = useNavigate(); // to navigate to different routes, came in replacement of useHistory()
+    const [username, setUsername] = useState(''); // to set the username of the user who's logging in
+    const [password, setPassword] = useState(''); // to set the password of the user who's logging in
 
     const loginUser = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/signin', {
-                name: username, password
-            }, { withCredentials: true });
+            const res = await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/signin',
+                { name: username, password }, // sends data to backend, accessed from req.body
+                { withCredentials: true } // for cookies to pass to backend
+            );
 
-            dispatch({ type: 'USER', payload: true })
+            dispatch({ type: 'USER', payload: true }) // no error from backend, set user_login context  
 
-            let token = res.data.details;
-            dispatchToken({ type: 'CHANGE', payload: token })
-            navigation('/about');
+            let token = res.data.details; // token sent from backend
+            dispatchToken({ type: 'CHANGE', payload: token }) // set user_token context
+
+            navigation('/about'); // page should navigate to about page
         } catch (e) {
             window.alert('invalid credentials');
         }
