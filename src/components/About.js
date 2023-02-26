@@ -61,17 +61,19 @@ function About() {
     };
 
     let setImage = (subjName, attendance) => {
-        if (attendance >= goal + 20)
+        if (attendance >= goal + 20) // >=95%
             setImgUrl(require('../assets/won.gif'))
-        else if (attendance >= goal)
+        else if (attendance >= goal) // >=75%
             setImgUrl(require('../assets/giphy.gif'))
-        else if (attendance >= goal - 15)
-            setImgUrl(require('../assets/keep-your-heads-up.gif'))
-        else if (attendance >= goal - 25)
+        else if (attendance >= goal - 5) // >=70%
             setImgUrl(require('../assets/pic.gif'))
-        else if (attendance >= goal - 30)
+        else if (attendance >= goal - 10) // >=65%
+            setImgUrl(require('../assets/keep-your-heads-up.gif'))
+        else if (attendance >= goal - 15) // >=60%
             setImgUrl(require('../assets/youre-not-keeping-up-keep-up.gif'))
-        else if (attendance >= goal - 35)
+        else if (attendance >= goal - 20) // >=55%
+            setImgUrl(require('../assets/try-harder-have-to-try-harder-than-that.gif'));
+        else if (attendance >= goal - 35) // >=40%
             setImgUrl(require('../assets/atleast-you-tried.gif'))
         else
             setImgUrl(require('../assets/loser-lounge.gif'))
