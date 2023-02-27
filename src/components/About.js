@@ -82,7 +82,7 @@ function About() {
         setTimeout(() => {
             setShowImage('');
         }, 2500);
-
+        console.log(imgUrl);
     }
     let incrementPresent = async (subjName) => {
         try {
