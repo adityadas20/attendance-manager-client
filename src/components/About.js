@@ -326,8 +326,8 @@ function About() {
                                                         </h4>
 
                                             }
-                                            <button type="button" className="btn btn-warning" onClick={() => toggleCalendarDisplay(subj.name)}>Calendar</button>
                                             <button type="button" className="btn btn-danger" onClick={() => deleteSubject(subj.name)}>Delete Subject</button>
+                                            <button type="button" className="btn btn-warning" onClick={() => toggleCalendarDisplay(subj.name)}>Calendar</button>
 
 
                                             {toggledSubjects.includes(subj.name) && <Calendar presentDates={subj.presentDates} absentDates={subj.absentDates} />}
