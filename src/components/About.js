@@ -10,7 +10,7 @@ function About() {
     const { stateToken, dispatchToken } = useContext(UserContext);
 
     const [showImage, setShowImage] = useState('');
-    const [imgUrl, setImgUrl] = useState('../assets/won.gif');
+    const [imgUrl, setImgUrl] = useState('');
     const [toggledSubjects, setToggledSubjects] = useState([]); // stores the subject names for which the calendar needs to be shown
     const [subName, setSubName] = useState(''); // stores new subject name
     const [present, setPresent] = useState(0); //  stores new subject number of present days
@@ -82,7 +82,7 @@ function About() {
         setTimeout(() => {
             setShowImage('');
         }, 2500);
-        console.log(imgUrl);
+
     }
     let incrementPresent = async (subjName) => {
         try {
@@ -326,8 +326,8 @@ function About() {
                                                         </h4>
 
                                             }
-                                            <span><button type="button" className="btn btn-warning" onClick={() => toggleCalendarDisplay(subj.name)}>Calendar</button></span>
-                                            <span><button type="button" className="btn btn-danger" onClick={() => deleteSubject(subj.name)}>Delete Subject</button></span>
+                                            <button type="button" className="btn btn-warning" onClick={() => toggleCalendarDisplay(subj.name)}>Calendar</button>
+                                            <button type="button" className="btn btn-danger" onClick={() => deleteSubject(subj.name)}>Delete Subject</button>
 
 
                                             {toggledSubjects.includes(subj.name) && <Calendar presentDates={subj.presentDates} absentDates={subj.absentDates} />}
