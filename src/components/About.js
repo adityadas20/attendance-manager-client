@@ -11,6 +11,7 @@ function About() {
 
     const [showImage, setShowImage] = useState('');
     const [imgUrl, setImgUrl] = useState('');
+    const [imgUrlArray, setImgUrlArray] = useState([]);
     const [toggledSubjects, setToggledSubjects] = useState([]); // stores the subject names for which the calendar needs to be shown
     const [subName, setSubName] = useState(''); // stores new subject name
     const [present, setPresent] = useState(0); //  stores new subject number of present days
@@ -48,6 +49,12 @@ function About() {
     }
     useEffect(() => {
         callAboutUsPage();
+        setImgUrlArray(
+            [require('../assets/won.gif'), require('../assets/giphy.gif'),
+            require('../assets/pic.gif'), require('../assets/keep-your-heads-up.gif'),
+            require('../assets/youre-not-keeping-up-keep-up.gif'), require('../assets/try-harder-have-to-try-harder-than-that.gif'),
+            require('../assets/atleast-you-tried.gif'), require('../assets/loser-lounge.gif')]
+        ); // loading gifs instantly when page loads and saving in cache which finally optimizes gif loading time
     }, []); // component did mount
 
     let currentYear = () => { // returns the current year
@@ -62,21 +69,21 @@ function About() {
 
     let setImage = (subjName, attendance) => {
         if (attendance >= goal + 20) // >=95%
-            setImgUrl(require('../assets/won.gif'))
+            setImgUrl(imgUrlArray[0])
         else if (attendance >= goal) // >=75%
-            setImgUrl(require('../assets/giphy.gif'))
+            setImgUrl(imgUrlArray[1])
         else if (attendance >= goal - 5) // >=70%
-            setImgUrl(require('../assets/pic.gif'))
+            setImgUrl(imgUrlArray[2])
         else if (attendance >= goal - 10) // >=65%
-            setImgUrl(require('../assets/keep-your-heads-up.gif'))
+            setImgUrl(imgUrlArray[3])
         else if (attendance >= goal - 15) // >=60%
-            setImgUrl(require('../assets/youre-not-keeping-up-keep-up.gif'))
+            setImgUrl(imgUrlArray[4])
         else if (attendance >= goal - 20) // >=55%
-            setImgUrl(require('../assets/try-harder-have-to-try-harder-than-that.gif'));
+            setImgUrl(imgUrlArray[5])
         else if (attendance >= goal - 35) // >=40%
-            setImgUrl(require('../assets/atleast-you-tried.gif'))
+            setImgUrl(imgUrlArray[6])
         else
-            setImgUrl(require('../assets/loser-lounge.gif'))
+            setImgUrl(imgUrlArray[7])
 
         setShowImage(subjName);
         setTimeout(() => {
