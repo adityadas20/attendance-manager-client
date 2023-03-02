@@ -9,9 +9,9 @@ import Calendar from './Calendar';
 function About() {
     const { stateToken, dispatchToken } = useContext(UserContext);
 
-    const [showImage, setShowImage] = useState('');
-    const [imgUrl, setImgUrl] = useState('');
-    const [imgUrlArray, setImgUrlArray] = useState([]);
+    const [showImage, setShowImage] = useState(''); // stores for which subject the gif needs to be displayed
+    const [imgUrl, setImgUrl] = useState(''); // stores which gif needs to be displayed
+    const [imgUrlArray, setImgUrlArray] = useState([]); // stores all the gifs in an array
     const [toggledSubjects, setToggledSubjects] = useState([]); // stores the subject names for which the calendar needs to be shown
     const [subName, setSubName] = useState(''); // stores new subject name
     const [present, setPresent] = useState(0); //  stores new subject number of present days
@@ -108,8 +108,8 @@ function About() {
                 if (tempArr[i].name === subjName) { // matches the subject from the array which actually needs to be changed
                     tempArr[i].present++;
 
-                    if (!tempArr[i].presentDates.includes(`${currentDate()} ${currentMonth()} ${currentYear()}`)) // to prevent multiple entries of the same date in the database
-                        tempArr[i].presentDates.push(`${currentDate()} ${currentMonth()} ${currentYear()}`) // push today's date in the database
+                    // if (!tempArr[i].presentDates.includes(`${currentDate()} ${currentMonth()} ${currentYear()}`)) // to prevent multiple entries of the same date in the database
+                    tempArr[i].presentDates.push(`${currentDate()} ${currentMonth()} ${currentYear()}`) // push today's date in the database
 
                     subjPresent = tempArr[i].present;
                     subjAbsent = tempArr[i].absent;
@@ -148,8 +148,10 @@ function About() {
                     subjPresent = tempArr[i].present;
                     subjAbsent = tempArr[i].absent;
 
-                    subjectPresentDates = tempArr[i].presentDates.filter((date) => { return date != `${currentDate()} ${currentMonth()} ${currentYear()}` }); // current date should be removed from the presentDates array
-                    tempArr[i].presentDates = subjectPresentDates;
+                    subjectPresentDates = [...tempArr[i].presentDates];
+                    if (subjectPresentDates[subjectPresentDates.length - 1] === `${currentDate()} ${currentMonth()} ${currentYear()}`)// we should not remove previous date entries
+                        subjectPresentDates.pop();
+                    tempArr[i].presentDates = [...subjectPresentDates];
                     subjectAbsentDates = tempArr[i].absentDates;
                 }
             }
@@ -178,8 +180,8 @@ function About() {
             for (let i = 0; i < tempArr.length; i++) {
                 if (tempArr[i].name === subjName) {
                     tempArr[i].absent++;
-                    if (!tempArr[i].absentDates.includes(`${currentDate()} ${currentMonth()} ${currentYear()}`)) // to prevent multiple entries of the same date in the database
-                        tempArr[i].absentDates.push(`${currentDate()} ${currentMonth()} ${currentYear()}`)
+                    // if (!tempArr[i].absentDates.includes(`${currentDate()} ${currentMonth()} ${currentYear()}`)) // to prevent multiple entries of the same date in the database
+                    tempArr[i].absentDates.push(`${currentDate()} ${currentMonth()} ${currentYear()}`)
                     subjPresent = tempArr[i].present;
                     subjAbsent = tempArr[i].absent;
                     subjectPresentDates = tempArr[i].presentDates;
@@ -216,8 +218,10 @@ function About() {
                     subjAbsent = tempArr[i].absent;
 
                     subjectPresentDates = tempArr[i].presentDates;
-                    subjectAbsentDates = tempArr[i].absentDates.filter((date) => { return date != `${currentDate()} ${currentMonth()} ${currentYear()}` });
-                    tempArr[i].absentDates = subjectAbsentDates;
+                    subjectAbsentDates = [...tempArr[i].absentDates];
+                    if (subjectAbsentDates[subjectAbsentDates.length - 1] === `${currentDate()} ${currentMonth()} ${currentYear()}`) // we should not remove previous date entries
+                        subjectAbsentDates.pop();
+                    tempArr[i].absentDates = [...subjectAbsentDates];
                 }
             }
 
