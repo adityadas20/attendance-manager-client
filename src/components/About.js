@@ -93,7 +93,7 @@ function About() {
         setShowImage(subjName);
         setTimeout(() => {
             setShowImage('');
-        }, 2500);
+        }, 1500);
 
     }
     let incrementPresent = async (subjName) => {
