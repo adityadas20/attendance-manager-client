@@ -117,12 +117,13 @@ function About() {
                     subjectAbsentDates = tempArr[i].absentDates;
                 }
             }
-            setSubjArr(tempArr); // subject array state updated
 
             // await axios.post('http://localhost:3000/updateSubject', {
             await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/updateSubject', {
                 name: user, subjectName: subjName, present: subjPresent, absent: subjAbsent, subjectPresentDates: subjectPresentDates, subjectAbsentDates: subjectAbsentDates
             })
+
+            setSubjArr(tempArr); // subject array state updated
 
             let attd = (parseInt(subjPresent) * 100 / Math.max((parseInt(subjPresent) + parseInt(subjAbsent)), 1)).toFixed(2);
             setImage(subjName, attd)
@@ -152,11 +153,13 @@ function About() {
                     subjectAbsentDates = tempArr[i].absentDates;
                 }
             }
-            setSubjArr(tempArr);
             // await axios.post('http://localhost:3000/updateSubject', {
             await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/updateSubject', {
                 name: user, subjectName: subjName, present: subjPresent, absent: subjAbsent, subjectPresentDates: subjectPresentDates, subjectAbsentDates: subjectAbsentDates
             })
+
+            setSubjArr(tempArr);
+
             let attd = (parseInt(subjPresent) * 100 / Math.max((parseInt(subjPresent) + parseInt(subjAbsent)), 1)).toFixed(2);
             setImage(subjName, attd)
         }
@@ -183,11 +186,14 @@ function About() {
                     subjectAbsentDates = tempArr[i].absentDates;
                 }
             }
-            setSubjArr(tempArr);
+
             // await axios.post('http://localhost:3000/updateSubject', {
             await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/updateSubject', {
                 name: user, subjectName: subjName, present: subjPresent, absent: subjAbsent, subjectPresentDates: subjectPresentDates, subjectAbsentDates: subjectAbsentDates
             })
+
+            setSubjArr(tempArr);
+
             let attd = (parseInt(subjPresent) * 100 / Math.max((parseInt(subjPresent) + parseInt(subjAbsent)), 1)).toFixed(2);
             setImage(subjName, attd)
         } catch (err) {
@@ -214,11 +220,14 @@ function About() {
                     tempArr[i].absentDates = subjectAbsentDates;
                 }
             }
-            setSubjArr(tempArr);
+
             // await axios.post('http://localhost:3000/updateSubject', {
             await axios.post('https://comfortable-newt-polo-shirt.cyclic.app/updateSubject', {
                 name: user, subjectName: subjName, present: subjPresent, absent: subjAbsent, subjectPresentDates: subjectPresentDates, subjectAbsentDates: subjectAbsentDates
             })
+
+            setSubjArr(tempArr);
+
             let attd = (parseInt(subjPresent) * 100 / Math.max((parseInt(subjPresent) + parseInt(subjAbsent)), 1)).toFixed(2);
             setImage(subjName, attd)
         } catch (err) {
