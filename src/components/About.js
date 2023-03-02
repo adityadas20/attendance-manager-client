@@ -55,6 +55,11 @@ function About() {
             require('../assets/youre-not-keeping-up-keep-up.gif'), require('../assets/try-harder-have-to-try-harder-than-that.gif'),
             require('../assets/atleast-you-tried.gif'), require('../assets/loser-lounge.gif')]
         ); // loading gifs instantly when page loads and saving in cache which finally optimizes gif loading time
+
+        setShowImage('loading');
+        setTimeout(() => {
+            setShowImage('');
+        }, 2500);
     }, []); // component did mount
 
     let currentYear = () => { // returns the current year
@@ -339,6 +344,9 @@ function About() {
 
                                             {toggledSubjects.includes(subj.name) && <Calendar presentDates={subj.presentDates} absentDates={subj.absentDates} />}
 
+                                            {showImage === 'loading' ?
+                                                imgUrlArray.map((url) => <img src={url} alt="Image" style={{ display: 'none' }} />)
+                                                : <></>}
                                         </h4>
                                     }
                                 </div>
